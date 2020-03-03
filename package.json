@@ -1,6 +1,6 @@
 {
   "name": "webdav-cli",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A simple zero-configuration command-line webdav server",
   "author": "Sviatoslav H",
   "license": "MIT",
@@ -31,9 +31,6 @@
     "test:e2e:dev": "jest --config ./tests/jest-e2e.json --runInBand --watch",
     "prerelease": "npm run build",
     "release": "release-it"
-  },
-  "Dependencies": {
-    "webdav": "^3.2.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.2",
