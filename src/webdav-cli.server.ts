@@ -41,9 +41,7 @@ export async function runServer(config: WebdavServerConfig) {
         const resultJoin = list.map(item => item).join('<br />');
         ctx.response.setHeader('Content-Type', 'text/html');
         ctx.response.end(resultJoin);
-      } catch {
-        ctx.response.end('READY!');
-      }
+      } catch {}
     }
     next();
   })
