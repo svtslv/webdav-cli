@@ -35,15 +35,17 @@ export async function runServer(config: WebdavServerConfig) {
     const isBrowser = ctx.request.headers['user-agent'].search('Mozilla/5.0') !== -1;
     const isDirectory = ctx.requested.uri.slice(-1) === '/';
     if(isDirectory && isBrowser) {
-      const resource = await server.getResourceAsync(ctx, '/');
-      const list = await resource.readDirAsync();
-      const resultJoin = list.map(item => item).join('<br />');
-      ctx.response.setHeader('Content-Type', 'text/html');
-      ctx.response.end(resultJoin);
-      ctx.exit();
-    } else {
-      next();
+      try {
+        const resource = await server.getResourceAsync(ctx, ctx.requested.uri);
+        const list = await resource.readDirAsync();
+        const resultJoin = list.map(item => item).join('<br />');
+        ctx.response.setHeader('Content-Type', 'text/html');
+        ctx.response.end(resultJoin);
+      } catch {
+        ctx.response.end('READY!');
+      }
     }
+    next();
   })
 }
 
