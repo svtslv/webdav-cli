@@ -34,7 +34,7 @@ export async function runServer(config: WebdavServerConfig) {
       try {
         const resource = await server.getResourceAsync(ctx, ctx.requested.uri);
         const list = await resource.readDirAsync();
-        const html = `<a href="..">..</a><br />` + list.map(item => `<a href="${item}">${item}</a><br/>`).join('');
+        const html = `<a href="..">..</a><br/>` + list.map(item => `<a href="${item}">${item}</a><br/>`).join('');
         ctx.response.setHeader('Content-Type', 'text/html');
         ctx.response.end(html);
       } catch {}
