@@ -9,14 +9,14 @@ import { getHelp, getVersion } from './webdav-cli.utils';
 
 const selfSignedKey = __dirname + '/../certs/self-signed.key.pem';
 const selfSignedCert = __dirname + '/../certs/self-signed.cert.pem';
-const path = process.env.WEBDAV_CLI_PATH || argv.path || process.cwd();
-const port = process.env.WEBDAV_CLI_PORT || argv.port || 1900;
-const host = process.env.WEBDAV_CLI_HOST || argv.host || '127.0.0.1';
-const username = process.env.WEBDAV_CLI_USERNAME || argv.username || Math.random().toString(36).replace(/[^a-z]+/g, '');
-const password = process.env.WEBDAV_CLI_PASSWORD || argv.password || Math.random().toString(36).replace(/[^a-z]+/g, '');
-const ssl = process.env.WEBDAV_CLI_SSL || argv.ssl || false;
-const sslKey = fs.readFileSync(process.env.WEBDAV_CLI_SSL_KEY || argv.sslKey || selfSignedKey).toString();
-const sslCert = fs.readFileSync(process.env.WEBDAV_CLI_SSL_CERT || argv.sslCert || selfSignedCert).toString();
+const path = argv.path || process.env.WEBDAV_CLI_PATH || process.cwd();
+const port = argv.port || process.env.WEBDAV_CLI_PORT || 1900;
+const host = argv.host || process.env.WEBDAV_CLI_HOST || '127.0.0.1';
+const username = argv.username || process.env.WEBDAV_CLI_USERNAME || Math.random().toString(36).replace(/[^a-z]+/g, '');
+const password = argv.password || process.env.WEBDAV_CLI_PASSWORD || Math.random().toString(36).replace(/[^a-z]+/g, '');
+const ssl = argv.ssl || process.env.WEBDAV_CLI_SSL || false;
+const sslKey = fs.readFileSync(argv.sslKey || process.env.WEBDAV_CLI_SSL_KEY || selfSignedKey).toString();
+const sslCert = fs.readFileSync(argv.sslCert || process.env.WEBDAV_CLI_SSL_CERT || selfSignedCert).toString();
 
 console.log(chalk.green(figlet.textSync('webdav-cli', { horizontalLayout: 'full' })));
 
