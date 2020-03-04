@@ -47,8 +47,8 @@ npx webdav-cli --help
     '  --help       Print this list and exit',
     '  --version    Print the version and exit.',
     'env:',
-    '  WEBDAV_CLI_PATH, WEBDAV_CLI_PORT, WEBDAV_CLI_HOST',
-    '  WEBDAV_CLI_USERNAME, WEBDAV_CLI_PASSWORD',
+    '  WEBDAV_CLI_PATH, WEBDAV_CLI_PORT, WEBDAV_CLI_HOST,',
+    '  WEBDAV_CLI_USERNAME, WEBDAV_CLI_PASSWORD, WEBDAV_CLI_DIGEST,',
     '  WEBDAV_CLI_SSL, WEBDAV_CLI_SSL_KEY, WEBDAV_CLI_SSL_CERT',
 ```
 

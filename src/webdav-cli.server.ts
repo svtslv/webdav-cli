@@ -9,8 +9,10 @@ export async function runServer(config: WebdavServerConfig) {
   const privilegeManager = new webdav.SimplePathPrivilegeManager();
   privilegeManager.setRights(user, '/', [ 'all' ]);
 
+  const authentication = config.digest ? 'HTTPDigestAuthentication' : 'HTTPBasicAuthentication';
+
   const server = new webdav.WebDAVServer({
-    httpAuthentication: new webdav.HTTPDigestAuthentication(userManager, 'Default realm'),
+    httpAuthentication: new webdav[authentication](userManager, 'Default realm'),
     privilegeManager: privilegeManager,
     https: config.ssl ? { cert: config.sslCert, key: config.sslKey } : null,
     port: config.port,

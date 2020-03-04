@@ -1,10 +1,11 @@
 export interface WebdavServerConfig {
+  path: string,
   port: number,
   host: string,
-  path: string,
+  username: string,
+  password: string,
+  digest: boolean,
   ssl: boolean,
   sslKey: string,
   sslCert: string,
-  username: string,
-  password: string,
 }

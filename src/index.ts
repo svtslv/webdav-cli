@@ -14,6 +14,7 @@ const port = argv.port || process.env.WEBDAV_CLI_PORT || 1900;
 const host = argv.host || process.env.WEBDAV_CLI_HOST || '127.0.0.1';
 const username = argv.username || process.env.WEBDAV_CLI_USERNAME || Math.random().toString(36).replace(/[^a-z]+/g, '');
 const password = argv.password || process.env.WEBDAV_CLI_PASSWORD || Math.random().toString(36).replace(/[^a-z]+/g, '');
+const digest = argv.digest || process.env.WEBDAV_CLI_DIGEST || false;
 const ssl = argv.ssl || process.env.WEBDAV_CLI_SSL || false;
 const sslKey = fs.readFileSync(argv.sslKey || process.env.WEBDAV_CLI_SSL_KEY || selfSignedKey).toString();
 const sslCert = fs.readFileSync(argv.sslCert || process.env.WEBDAV_CLI_SSL_CERT || selfSignedCert).toString();
@@ -28,4 +29,4 @@ if (argv.version) {
   getVersion();
 }
 
-runServer({ path, host, port, username, password, ssl, sslCert, sslKey });
+runServer({ path, host, port, username, password, digest, ssl, sslCert, sslKey });
