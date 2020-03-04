@@ -41,6 +41,7 @@ npx webdav-cli --help
     '  --host       Host to use [127.0.0.1]',
     '  --username   Username for basic authentication [random]',
     '  --password   Password for basic authentication [random]',
+    '  --digest     Enable digest authentication [false]',
     '  --ssl        Enable https [false]',
     '  --sslKey     Path to ssl key file [self-signed]',
     '  --sslCert    Path to ssl cert file [self-signed]',
