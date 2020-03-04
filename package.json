@@ -1,10 +1,9 @@
 {
   "name": "webdav-cli",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A simple zero-configuration command-line webdav server",
   "author": "Sviatoslav H",
   "license": "MIT",
-  "main": "dist/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/svtslv/webdav-cli"
@@ -15,10 +14,11 @@
     "webdav",
     "server"
   ],
-  "preferGlobal": true,
   "bin": {
     "webdav-cli": "./dist/index.js"
   },
+  "preferGlobal": true,
+  "main": "dist/index.js",
   "scripts": {
     "build": "rm -rf dist && tsc -p tsconfig.json",
     "format": "prettier --write \"**/*.ts\"",
@@ -42,7 +42,7 @@
     "eslint": "^6.7.2",
     "eslint-config-prettier": "^6.7.0",
     "eslint-plugin-import": "^2.19.1",
-    "jest": "^24.9.0",
+    "jest": "^25.1.0",
     "prettier": "^1.18.2",
     "reflect-metadata": "^0.1.13",
     "supertest": "^4.0.2",
