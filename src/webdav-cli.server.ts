@@ -30,14 +30,13 @@ export async function runServer(config: WebdavServerConfig) {
 
   server.beforeRequest(async (ctx, next) => {
     const isBrowser = ctx.request.headers['user-agent'].search('Mozilla/5.0') !== -1;
-    const isDirectory = ctx.requested.uri.slice(-1) === '/';
-    if(isDirectory && isBrowser) {
+    if(isBrowser) {
       try {
         const resource = await server.getResourceAsync(ctx, ctx.requested.uri);
         const list = await resource.readDirAsync();
-        const resultJoin = list.map(item => item).join('<br />');
+        const html = `<a href="..">..</a><br />` + list.map(item => `<a href="${item}">${item}</a><br/>`).join('');
         ctx.response.setHeader('Content-Type', 'text/html');
-        ctx.response.end(resultJoin);
+        ctx.response.end(html);
       } catch {}
     }
     next();
