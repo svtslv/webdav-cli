@@ -34,7 +34,9 @@ export async function runServer(config: WebdavServerConfig) {
       try {
         const resource = await server.getResourceAsync(ctx, ctx.requested.uri);
         const list = await resource.readDirAsync();
-        const html = `<a href="..">..</a><br/>` + list.map(item => `<a href="${item}">${item}</a><br/>`).join('');
+        const uri = ctx.requested.uri.slice(-1) === '/' ? ctx.requested.uri : ctx.requested.uri + '/';
+        const up =  `<a href="${ uri.split('/').slice(0, -2).join('/') || '/' }">..</a><br/>`;
+        const html = up + list.map(item => `<a href="${ uri + item }">${ item }</a><br/>`).join('');
         ctx.response.setHeader('Content-Type', 'text/html');
         ctx.response.end(html);
       } catch {}
@@ -47,4 +49,3 @@ export async function runServer(config: WebdavServerConfig) {
     next();
   });
 }
-
