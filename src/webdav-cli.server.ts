@@ -17,17 +17,14 @@ export async function runServer(config: WebdavServerConfig) {
     hostname: config.host,
   });
 
-  server.afterRequest((arg, next) => {
-    console.log('>>', arg.request.method, arg.requested.uri, '>', arg.response.statusCode, arg.response.statusMessage);
-    next();
-  });
-
   server.setFileSystem('/', new webdav.PhysicalFileSystem(config.path), () => {
     const host = `${ config.ssl ? 'https' : 'http' }://${ config.host }:${ config.port }/`;
     server.start(() => {
       console.log(`Server running at ${ host }`);
       console.log(`username: ${ config.username }`);
       console.log(`password: ${ config.password }`);
+      console.log('Hit CTRL-C to stop the server');
+      console.log('Run with --help to print help');
     });
   });
 
@@ -44,6 +41,11 @@ export async function runServer(config: WebdavServerConfig) {
       } catch {}
     }
     next();
-  })
+  });
+
+  server.afterRequest((arg, next) => {
+    console.log('>>', arg.request.method, arg.requested.uri, '>', arg.response.statusCode, arg.response.statusMessage);
+    next();
+  });
 }
 
