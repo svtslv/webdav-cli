@@ -1,3 +1,11 @@
+import * as chalk from 'chalk';
+import * as figlet from 'figlet';
+
+export function getLogo() {
+  console.log(chalk.green(figlet.textSync('webdav-cli', { horizontalLayout: 'full' })));
+  console.log(chalk.green(`Homepage: ${ require('../package.json').repository.url }\n`));
+}
+
 export function getHelp() {
   console.log([
     'usage: webdav-cli [options]',

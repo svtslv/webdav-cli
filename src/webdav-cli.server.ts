@@ -20,10 +20,11 @@ export async function runServer(config: WebdavServerConfig) {
   });
 
   server.setFileSystem('/', new webdav.PhysicalFileSystem(config.path), () => {
-    const host = `${ config.ssl ? 'https' : 'http' }://${ config.host }:${ config.port }/`;
+    const host = `${ config.ssl ? 'https' : 'http' }://${ config.host }:${ config.port }`;
     server.start(() => {
       console.log(`Server running at ${ host }`);
       console.log(`[rights]: ${ config.rights.join(', ') }`);
+      console.log(`[digest]: ${ config.digest }`);
       console.log(`username: ${ config.username }`);
       console.log(`password: ${ config.password }`);
       console.log('Hit CTRL-C to stop the server');

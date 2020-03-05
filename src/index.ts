@@ -1,15 +1,14 @@
 #!/usr/bin/env node
 
 import * as fs from 'fs';
-import * as chalk from 'chalk';
-import * as figlet from 'figlet';
+import { join } from 'path';
 import { argv } from 'optimist';
 import { runServer } from './webdav-cli.server';
-import { getHelp, getVersion } from './webdav-cli.utils';
+import { getHelp, getVersion, getLogo } from './webdav-cli.utils';
 import { Rights } from './webdav-cli.interfaces';
 
-const selfSignedKey = __dirname + '/../certs/self-signed.key.pem';
-const selfSignedCert = __dirname + '/../certs/self-signed.cert.pem';
+const selfSignedKey = join(__dirname, '/../certs/self-signed.key.pem');
+const selfSignedCert = join(__dirname, '/../certs/self-signed.cert.pem');
 const path = argv.path || process.env.WEBDAV_CLI_PATH || process.cwd();
 const host = argv.host || process.env.WEBDAV_CLI_HOST || '127.0.0.1';
 const port = argv.port || process.env.WEBDAV_CLI_PORT || 1900;
@@ -35,7 +34,7 @@ argv.rights = argv.rights || process.env.WEBDAV_CLI_RIGHTS;
 argv.rights = argv.rights && typeof argv.rights === 'string' ? argv.rights : 'all';
 const rights: Rights = argv.rights.split(',').filter((item: Rights[number]) => allRights.includes(item));
 
-console.log(chalk.green(figlet.textSync('webdav-cli', { horizontalLayout: 'full' })));
+getLogo();
 
 if (argv.help) {
   getHelp();
