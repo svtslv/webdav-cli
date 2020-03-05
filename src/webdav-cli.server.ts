@@ -7,7 +7,7 @@ export async function runServer(config: WebdavServerConfig) {
   const user = userManager.addUser(config.username, config.password, false);
 
   const privilegeManager = new webdav.SimplePathPrivilegeManager();
-  privilegeManager.setRights(user, '/', [ 'all' ]);
+  privilegeManager.setRights(user, '/', config.rights);
 
   const authentication = config.digest ? 'HTTPDigestAuthentication' : 'HTTPBasicAuthentication';
 
@@ -23,6 +23,7 @@ export async function runServer(config: WebdavServerConfig) {
     const host = `${ config.ssl ? 'https' : 'http' }://${ config.host }:${ config.port }/`;
     server.start(() => {
       console.log(`Server running at ${ host }`);
+      console.log(`[rights]: ${ config.rights.join(', ') }`);
       console.log(`username: ${ config.username }`);
       console.log(`password: ${ config.password }`);
       console.log('Hit CTRL-C to stop the server');

@@ -6,6 +6,7 @@ import * as fs from 'fs';
 import { argv } from 'optimist';
 import { runServer } from './webdav-cli.server';
 import { getHelp, getVersion } from './webdav-cli.utils';
+import { Rights } from './webdav-cli.interfaces';
 
 const selfSignedKey = __dirname + '/../certs/self-signed.key.pem';
 const selfSignedCert = __dirname + '/../certs/self-signed.cert.pem';
@@ -19,6 +20,18 @@ const ssl = argv.ssl || process.env.WEBDAV_CLI_SSL || false;
 const sslKey = fs.readFileSync(argv.sslKey || process.env.WEBDAV_CLI_SSL_KEY || selfSignedKey).toString();
 const sslCert = fs.readFileSync(argv.sslCert || process.env.WEBDAV_CLI_SSL_CERT || selfSignedCert).toString();
 
+const allRights: Rights  = [
+  'all', 'canCreate', 'canDelete', 'canMove', 'canRename', 'canAppend', 
+  'canWrite', 'canRead', 'canSource', 'canGetMimeType', 'canGetSize', 
+  'canListLocks', 'canSetLock', 'canRemoveLock', 'canGetAvailableLocks', 
+  'canGetLock', 'canAddChild', 'canRemoveChild', 'canGetChildren', 
+  'canSetProperty', 'canGetProperty', 'canGetProperties', 'canRemoveProperty', 
+  'canGetCreationDate', 'canGetLastModifiedDate', 'canGetWebName', 'canGetType',
+];
+
+argv.rights = argv.rights && typeof argv.rights === 'string' ? argv.rights : 'all';
+const rights: Rights = argv.rights.split(',').filter((item: Rights[number]) => allRights.includes(item));
+
 console.log(chalk.green(figlet.textSync('webdav-cli', { horizontalLayout: 'full' })));
 
 if (argv.help) {
@@ -29,4 +42,4 @@ if (argv.version) {
   getVersion();
 }
 
-runServer({ host, path, port, username, digest, password, ssl, sslCert, sslKey });
+runServer({ host, path, port, username, digest, password, ssl, sslCert, sslKey, rights });
