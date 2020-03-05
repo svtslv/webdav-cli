@@ -21,14 +21,17 @@ const sslKey = fs.readFileSync(argv.sslKey || process.env.WEBDAV_CLI_SSL_KEY || 
 const sslCert = fs.readFileSync(argv.sslCert || process.env.WEBDAV_CLI_SSL_CERT || selfSignedCert).toString();
 
 const allRights: Rights  = [
-  'all', 'canCreate', 'canDelete', 'canMove', 'canRename', 'canAppend', 
-  'canWrite', 'canRead', 'canSource', 'canGetMimeType', 'canGetSize', 
-  'canListLocks', 'canSetLock', 'canRemoveLock', 'canGetAvailableLocks', 
-  'canGetLock', 'canAddChild', 'canRemoveChild', 'canGetChildren', 
-  'canSetProperty', 'canGetProperty', 'canGetProperties', 'canRemoveProperty', 
-  'canGetCreationDate', 'canGetLastModifiedDate', 'canGetWebName', 'canGetType',
+  'all', 'canCreate', 'canDelete', 'canMove', 'canRename', 
+  'canAppend', 'canWrite', 'canRead', 'canSource', 
+  'canGetMimeType', 'canGetSize', 'canListLocks', 
+  'canSetLock', 'canRemoveLock', 'canGetAvailableLocks', 
+  'canGetLock', 'canAddChild', 'canRemoveChild', 
+  'canGetChildren', 'canSetProperty', 'canGetProperty', 
+  'canGetProperties', 'canRemoveProperty', 'canGetCreationDate', 
+  'canGetLastModifiedDate', 'canGetWebName', 'canGetType',
 ];
 
+argv.rights = argv.rights || process.env.WEBDAV_CLI_RIGHTS;
 argv.rights = argv.rights && typeof argv.rights === 'string' ? argv.rights : 'all';
 const rights: Rights = argv.rights.split(',').filter((item: Rights[number]) => allRights.includes(item));
 

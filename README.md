@@ -49,16 +49,19 @@ npx webdav-cli --help
     '  --help       Print this list and exit',
     '  --version    Print the version and exit.',
     '  --rights     Comma separated values without spaces [all]', `
-        'all', 'canCreate', 'canDelete', 'canMove', 'canRename', 'canAppend', 
-        'canWrite', 'canRead', 'canSource', 'canGetMimeType', 'canGetSize', 
-        'canListLocks', 'canSetLock', 'canRemoveLock', 'canGetAvailableLocks', 
-        'canGetLock', 'canAddChild', 'canRemoveChild', 'canGetChildren', 
-        'canSetProperty', 'canGetProperty', 'canGetProperties', 'canRemoveProperty', 
-        'canGetCreationDate', 'canGetLastModifiedDate', 'canGetWebName', 'canGetType'`,
+        'all', 'canCreate', 'canDelete', 'canMove', 'canRename', 
+        'canAppend', 'canWrite', 'canRead', 'canSource', 
+        'canGetMimeType', 'canGetSize', 'canListLocks', 
+        'canSetLock', 'canRemoveLock', 'canGetAvailableLocks', 
+        'canGetLock', 'canAddChild', 'canRemoveChild', 
+        'canGetChildren', 'canSetProperty', 'canGetProperty', 
+        'canGetProperties', 'canRemoveProperty', 'canGetCreationDate', 
+        'canGetLastModifiedDate', 'canGetWebName', 'canGetType'`,
     'env:',
-    '  WEBDAV_CLI_PATH, WEBDAV_CLI_HOST, WEBDAV_CLI_PORT, WEBDAV_CLI_RIGHTS,',
-    '  WEBDAV_CLI_DIGEST, WEBDAV_CLI_USERNAME, WEBDAV_CLI_PASSWORD,',
-    '  WEBDAV_CLI_SSL, WEBDAV_CLI_SSL_KEY, WEBDAV_CLI_SSL_CERT',
+    '  WEBDAV_CLI_PATH, WEBDAV_CLI_HOST, WEBDAV_CLI_PORT',
+    '  WEBDAV_CLI_USERNAME, WEBDAV_CLI_PASSWORD,',
+    '  WEBDAV_CLI_SSL, WEBDAV_CLI_SSL_KEY, WEBDAV_CLI_SSL_CERT,',
+    '  WEBDAV_CLI_DIGEST, WEBDAV_CLI_RIGHTS',
 ```
 
 ## TLS/SSL
