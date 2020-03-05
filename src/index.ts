@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
+import * as fs from 'fs';
 import * as chalk from 'chalk';
 import * as figlet from 'figlet';
-import * as fs from 'fs';
 import { argv } from 'optimist';
 import { runServer } from './webdav-cli.server';
 import { getHelp, getVersion } from './webdav-cli.utils';

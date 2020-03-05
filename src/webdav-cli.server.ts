@@ -1,4 +1,4 @@
-import { v2 as webdav } from 'webdav-server'
+import { v2 as webdav } from 'webdav-server';
 import { WebdavServerConfig } from './webdav-cli.interfaces';
 
 export async function runServer(config: WebdavServerConfig) {
