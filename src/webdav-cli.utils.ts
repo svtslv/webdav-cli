@@ -3,7 +3,7 @@ import * as figlet from 'figlet';
 
 export function getLogo() {
   console.log(chalk.green(figlet.textSync('webdav-cli', { horizontalLayout: 'full' })));
-  console.log(chalk.green(`Homepage: ${ require('../package.json').repository.url }\n`));
+  console.log(chalk.green(`Homepage: https://github.com/svtslv/webdav-cli\n`));
 }
 
 export function getHelp() {
