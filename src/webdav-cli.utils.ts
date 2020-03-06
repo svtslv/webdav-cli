@@ -1,12 +1,12 @@
 import * as chalk from 'chalk';
 import * as figlet from 'figlet';
 
-export function getLogo() {
+export function printLogo() {
   console.log(chalk.green(figlet.textSync('webdav-cli', { horizontalLayout: 'full' })));
   console.log(chalk.green(`Homepage: https://github.com/svtslv/webdav-cli\n`));
 }
 
-export function getHelp() {
+export function printHelp() {
   console.log([
     'usage: webdav-cli [options]',
     '',
@@ -42,7 +42,7 @@ export function getHelp() {
   process.exit();
 }
 
-export function getVersion() {
+export function printVersion() {
   console.log('Version: ' + require('../package.json').version, '\n');
   process.exit();
 }
