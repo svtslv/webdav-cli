@@ -8,6 +8,7 @@
 - [Description](#description)
 - [Installation](#installation)
 - [Examples](#examples)
+- [TLS/SSL](#tlsssl)
 - [License](#license)
 
 ## Description
