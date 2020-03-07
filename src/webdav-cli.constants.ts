@@ -1,6 +1,6 @@
 import { WebdavCliRights } from './webdav-cli.interfaces';
 
-export const HOMEPAGE = 'homepage';
+export const HOMEPAGE = 'https://github.com/svtslv/webdav-cli';
 
 export const RIGHTS: WebdavCliRights = [
   'all', 'canCreate', 'canDelete', 'canMove', 'canRename',
