@@ -1,6 +1,6 @@
 {
   "name": "webdav-cli",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "A simple zero-configuration command-line webdav server",
   "author": "Sviatoslav H",
   "license": "MIT",
@@ -15,7 +15,7 @@
     "server"
   ],
   "bin": {
-    "webdav-cli": "./dist/index.js"
+    "webdav-cli": "./dist/webdav-cli.cli.js"
   },
   "preferGlobal": true,
   "main": "dist/index.js",

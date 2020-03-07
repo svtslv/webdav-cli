@@ -1,8 +1,8 @@
-import { BasicPrivilege } from "webdav-server";
+import { BasicPrivilege, v2 as webdav } from "webdav-server";
 
-export type Rights = BasicPrivilege[];
+export type WebdavCliRights = BasicPrivilege[];
 
-export interface WebdavServerConfig {
+export interface WebdavCliConfig {
   path: string,
   host: string,
   port: number,
@@ -12,5 +12,10 @@ export interface WebdavServerConfig {
   ssl: boolean,
   sslKey: string,
   sslCert: string,
-  rights: Rights,
+  rights: WebdavCliRights,
+  url?: string,
+}
+
+export interface WebdavCliServer extends webdav.WebDAVServer {
+  config: WebdavCliConfig,
 }
