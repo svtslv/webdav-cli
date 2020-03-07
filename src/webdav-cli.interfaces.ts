@@ -1,4 +1,4 @@
-import { BasicPrivilege, v2 as webdav } from "webdav-server";
+import { BasicPrivilege, v2 as webdav } from 'webdav-server';
 
 export type WebdavCliRights = BasicPrivilege[];
 

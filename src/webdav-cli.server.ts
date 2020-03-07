@@ -1,6 +1,6 @@
-import * as fs from "fs";
-import { join } from "path";
-import { v2 as webdav } from "webdav-server";
+import * as fs from 'fs';
+import { join } from 'path';
+import { v2 as webdav } from 'webdav-server';
 import { getRandomString } from './webdav-cli.utils';
 import { RIGHTS } from './webdav-cli.constants';
 import { WebdavCliServer, WebdavCliConfig, WebdavCliRights  } from './webdav-cli.interfaces';
