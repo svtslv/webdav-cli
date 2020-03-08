@@ -66,5 +66,11 @@ const config = {
   rights: argvRights || envRights,
 };
 
-const webdavCli = new WebdavCli(config);
-webdavCli.start().then();
+const run = async() => {
+  const webdavCli = new WebdavCli(config);
+  const webdavCliServer = await webdavCli.start();
+  webdavCliServer.on('log', (ctx, fs, path, log) => console.log(log));
+};
+
+run();
+

@@ -1,6 +1,6 @@
 {
   "name": "webdav-cli",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A simple zero-configuration command-line webdav server",
   "author": "Sviatoslav H",
   "license": "MIT",
