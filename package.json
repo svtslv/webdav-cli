@@ -1,6 +1,6 @@
 {
   "name": "webdav-cli",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "A simple zero-configuration command-line webdav server",
   "author": "Sviatoslav H",
   "license": "MIT",
@@ -14,21 +14,24 @@
     "webdav",
     "server"
   ],
+  "files": [
+    "dist",
+    "certs"
+  ],
   "bin": {
     "webdav-cli": "./dist/webdav-cli.cli.js"
   },
   "preferGlobal": true,
   "main": "dist/index.js",
   "scripts": {
-    "build": "rm -rf dist && tsc -p tsconfig.json",
+    "build": "rm -rf dist && tsc -p tsconfig.build.json",
     "format": "prettier --write \"**/*.ts\"",
     "lint": "eslint 'lib/**/*.ts' --fix",
+    "test": "jest --config ./test/jest.config.json --runInBand",
     "prepublish:npm": "npm run build",
     "publish:npm": "npm publish --access public",
     "prepublish:next": "npm run build",
     "publish:next": "npm publish --access public --tag next",
-    "test:e2e": "jest --config ./tests/jest-e2e.json --runInBand",
-    "test:e2e:dev": "jest --config ./tests/jest-e2e.json --runInBand --watch",
     "prerelease": "npm run build",
     "release": "release-it"
   },
@@ -45,6 +48,7 @@
     "jest": "^25.1.0",
     "prettier": "^1.18.2",
     "reflect-metadata": "^0.1.13",
+    "release-it": "^13.0.2",
     "supertest": "^4.0.2",
     "ts-jest": "25.2.0",
     "ts-loader": "^6.2.1",
