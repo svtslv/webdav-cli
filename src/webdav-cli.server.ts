@@ -29,7 +29,12 @@ export class WebdavCli {
     const sslCert = ssl ? fs.readFileSync(config.sslCert || selfSignedCert).toString() : '';
 
     const disableAuthentication = Boolean(config.disableAuthentication);
-    config.rights = disableAuthentication && !config.rights ? ['canRead'] : config.rights;
+
+    if(disableAuthentication) {
+      config.rights = disableAuthentication && !config.rights ? ['canRead'] : config.rights;
+      config.username = '';
+      config.password = '';
+    }
 
     const rights = (config.rights || ['all']).filter((item: WebdavCliRights[number]) => RIGHTS.includes(item));
     const url = `${ ssl ? 'https' : 'http' }://${ host }:${ port }`;
