@@ -20,18 +20,18 @@ export class WebdavCli {
     const host = config.host || '127.0.0.1';
     const port = config.port || 1900;
 
-    const digest = config.digest || false;
+    const digest = Boolean(config.digest);
     let username = (config.username || getRandomString(16)).toString();
     let password = (config.password || getRandomString(16)).toString();
 
-    const ssl = config.ssl || Boolean(process.env.WEBDAV_CLI_SSL) || false;
+    const ssl = Boolean(config.ssl);
     const sslKey = ssl ? fs.readFileSync(config.sslKey || selfSignedKey).toString() : '';
     const sslCert = ssl ? fs.readFileSync(config.sslCert || selfSignedCert).toString() : '';
 
     const disableAuthentication = Boolean(config.disableAuthentication);
 
     if(disableAuthentication) {
-      config.rights = disableAuthentication && !config.rights ? ['canRead'] : config.rights;
+      config.rights = config.rights || ['canRead'];
       username = '';
       password = '';
     }
