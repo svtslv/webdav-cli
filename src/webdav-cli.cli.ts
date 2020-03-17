@@ -37,9 +37,9 @@ if (argv.help) {
     '',
     'env:',
     '  WEBDAV_CLI_PATH, WEBDAV_CLI_HOST, WEBDAV_CLI_PORT,',
-    '  WEBDAV_CLI_USERNAME, WEBDAV_CLI_PASSWORD,',
+    '  WEBDAV_CLI_USERNAME, WEBDAV_CLI_PASSWORD, WEBDAV_CLI_DIGEST,',
     '  WEBDAV_CLI_SSL, WEBDAV_CLI_SSL_KEY, WEBDAV_CLI_SSL_CERT,',
-    '  WEBDAV_CLI_DIGEST, WEBDAV_CLI_RIGHTS',
+    '  WEBDAV_CLI_RIGHTS, WEBDAV_CLI_DISABLE_AUTHENTICATION',
     '',
   ].join('\n'));
   process.exit();
@@ -63,6 +63,7 @@ const config = {
   ssl: argv.ssl || Boolean(process.env.WEBDAV_CLI_SSL),
   sslKey: argv.sslKey || process.env.WEBDAV_CLI_SSL_KEY,
   sslCert: argv.sslCert || process.env.WEBDAV_CLI_SSL_CERT,
+  disableAuthentication: argv.disableAuthentication || process.env.WEBDAV_CLI_DISABLE_AUTHENTICATION,
   rights: argvRights || envRights,
 };
 

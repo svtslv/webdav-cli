@@ -13,6 +13,7 @@ export interface WebdavCliConfig {
   sslKey: string,
   sslCert: string,
   rights: WebdavCliRights,
+  disableAuthentication?: boolean,
   url?: string,
 }
 

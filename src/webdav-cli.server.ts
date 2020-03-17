@@ -28,10 +28,13 @@ export class WebdavCli {
     const sslKey = ssl ? fs.readFileSync(config.sslKey || selfSignedKey).toString() : '';
     const sslCert = ssl ? fs.readFileSync(config.sslCert || selfSignedCert).toString() : '';
 
+    const disableAuthentication = Boolean(config.disableAuthentication);
+    config.rights = disableAuthentication && !config.rights ? ['canRead'] : config.rights;
+
     const rights = (config.rights || ['all']).filter((item: WebdavCliRights[number]) => RIGHTS.includes(item));
     const url = `${ ssl ? 'https' : 'http' }://${ host }:${ port }`;
 
-    return { host, path, port, username, digest, password, ssl, sslCert, sslKey, rights, url };
+    return { host, path, port, username, digest, password, ssl, sslCert, sslKey, rights, url, disableAuthentication };
   }
 
   async start(): Promise<WebdavCliServer> {
@@ -46,7 +49,15 @@ export class WebdavCli {
     const authentication = config.digest ? 'HTTPDigestAuthentication' : 'HTTPBasicAuthentication';
 
     const server = new webdav.WebDAVServer({
-      httpAuthentication: new webdav[authentication](userManager, 'Default realm'),
+      httpAuthentication: config.disableAuthentication ? { 
+        askForAuthentication: () => ({}),
+        getUser: (ctx, gotUserCallback) => { 
+          userManager.getDefaultUser((defaultUser) => { 
+            privilegeManager.setRights(defaultUser, '/', config.rights);
+            gotUserCallback(null, defaultUser);
+          });
+        }
+      } : new webdav[authentication](userManager, 'Default realm'),
       privilegeManager: privilegeManager,
       https: config.ssl ? { cert: config.sslCert, key: config.sslKey } : null,
       port: config.port,
