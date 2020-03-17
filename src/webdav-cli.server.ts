@@ -16,25 +16,25 @@ export class WebdavCli {
     const selfSignedKey = join(__dirname, '/../certs/self-signed.key.pem');
     const selfSignedCert = join(__dirname, '/../certs/self-signed.cert.pem');
 
-    const disableAuthentication = Boolean(config.disableAuthentication);
-
-    if(disableAuthentication) {
-      config.rights = disableAuthentication && !config.rights ? ['canRead'] : config.rights;
-      config.username = '';
-      config.password = '';
-    }
-
     const path = config.path || process.cwd();
     const host = config.host || '127.0.0.1';
     const port = config.port || 1900;
 
     const digest = config.digest || false;
-    const username = (config.username || getRandomString(16)).toString();
-    const password = (config.password || getRandomString(16)).toString();
+    let username = (config.username || getRandomString(16)).toString();
+    let password = (config.password || getRandomString(16)).toString();
 
     const ssl = config.ssl || Boolean(process.env.WEBDAV_CLI_SSL) || false;
     const sslKey = ssl ? fs.readFileSync(config.sslKey || selfSignedKey).toString() : '';
     const sslCert = ssl ? fs.readFileSync(config.sslCert || selfSignedCert).toString() : '';
+
+    const disableAuthentication = Boolean(config.disableAuthentication);
+
+    if(disableAuthentication) {
+      config.rights = disableAuthentication && !config.rights ? ['canRead'] : config.rights;
+      username = '';
+      password = '';
+    }
 
     const rights = (config.rights || ['all']).filter((item: WebdavCliRights[number]) => RIGHTS.includes(item));
     const url = `${ ssl ? 'https' : 'http' }://${ host }:${ port }`;
