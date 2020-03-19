@@ -2,10 +2,11 @@
 
 import * as chalk from 'chalk';
 import * as figlet from 'figlet';
-import { argv } from 'optimist';
+import * as minimist from 'minimist';
 import { WebdavCli } from './webdav-cli.server';
 import { HOMEPAGE } from './webdav-cli.constants';
 
+const argv = minimist(process.argv.slice(2));
 console.log(chalk.green(figlet.textSync('webdav-cli', { horizontalLayout: 'full' })));
 console.log(chalk.green(`Homepage: ${ HOMEPAGE }\n`));
 
@@ -64,7 +65,7 @@ const config = {
   sslKey: argv.sslKey || process.env.WEBDAV_CLI_SSL_KEY,
   sslCert: argv.sslCert || process.env.WEBDAV_CLI_SSL_CERT,
   disableAuthentication: argv.disableAuthentication || process.env.WEBDAV_CLI_DISABLE_AUTHENTICATION,
-  rights: argvRights || envRights,
+  rights: (argvRights || envRights) as any,
 };
 
 const run = async() => {
