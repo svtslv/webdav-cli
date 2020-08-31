@@ -72,7 +72,7 @@ export class WebdavCli {
     server.config = config;
 
     server.beforeRequest(async (ctx, next) => {
-      const isBrowser = ctx.request.headers['user-agent'].search('Mozilla/5.0') !== -1;
+    /*  const isBrowser = ctx.request.headers['user-agent'].search('Mozilla/5.0') !== -1;
       if(isBrowser) {
         try {
           const resource = await server.getResourceAsync(ctx, ctx.requested.uri);
@@ -83,7 +83,8 @@ export class WebdavCli {
           ctx.response.setHeader('Content-Type', 'text/html');
           ctx.response.end(html);
         } catch {}
-      }
+      }*/
+      console.log(ctx.request.method,ctx.request.url,ctx.request.headers)
       next();
     });
 
