@@ -1,6 +1,6 @@
 {
   "name": "webdav-cli",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "A simple zero-configuration command-line webdav server",
   "author": "Sviatoslav H",
   "license": "MIT",
@@ -33,10 +33,16 @@
     "test": "jest --config ./test/jest.config.json --runInBand",
     "prepublish:npm": "npm run build",
     "publish:npm": "npm publish --access public",
-    "prepublish:next": "npm run build",
-    "publish:next": "npm publish --access public --tag next",
+    "prepublish:test": "npm run build",
+    "publish:test": "npm publish --access public --tag test",
     "prerelease": "npm run build",
     "release": "release-it"
+  },
+  "dependencies": {
+    "chalk": "^3.0.0",
+    "figlet": "^1.3.0",
+    "minimist": "^1.2.5",
+    "webdav-server": "^2.6.2"
   },
   "devDependencies": {
     "@types/figlet": "^1.2.0",
@@ -59,11 +65,5 @@
     "ts-node": "^8.6.2",
     "tsconfig-paths": "^3.9.0",
     "typescript": "^3.8.3"
-  },
-  "dependencies": {
-    "chalk": "^3.0.0",
-    "figlet": "^1.3.0",
-    "minimist": "^1.2.5",
-    "webdav-server": "^2.6.2"
   }
 }

@@ -39,7 +39,13 @@ export class WebdavCli {
     const rights = (config.rights || ['all']).filter((item: WebdavCliRights[number]) => RIGHTS.includes(item));
     const url = `${ ssl ? 'https' : 'http' }://${ host }:${ port }`;
 
-    return { host, path, port, username, digest, password, ssl, sslCert, sslKey, rights, url, disableAuthentication };
+    const directory = Boolean(config.directory);
+    const autoIndex = Boolean(config.autoIndex);
+
+    return { 
+      host, path, port, username, digest, password, ssl, sslCert, 
+      sslKey, rights, url, disableAuthentication, directory, autoIndex,
+    };
   }
 
   async start(): Promise<WebdavCliServer> {
@@ -72,17 +78,23 @@ export class WebdavCli {
     server.config = config;
 
     server.beforeRequest(async (ctx, next) => {
-      const isBrowser = ctx.request.headers['user-agent'].search('Mozilla/5.0') !== -1;
-      if(isBrowser) {
-        try {
-          const resource = await server.getResourceAsync(ctx, ctx.requested.uri);
-          const list = await resource.readDirAsync();
-          const uri = ctx.requested.uri.slice(-1) === '/' ? ctx.requested.uri : ctx.requested.uri + '/';
-          const up =  `<a href="${ uri.split('/').slice(0, -2).join('/') || '/' }">..</a><br/>`;
-          const html = up + list.map(item => `<a href="${ uri + item }">${ item }</a><br/>`).join('');
-          ctx.response.setHeader('Content-Type', 'text/html');
-          ctx.response.end(html);
-        } catch {}
+      if (config.directory) {
+        const isBrowser = ctx.request.headers['user-agent'].search('Mozilla/5.0') !== -1;
+        if(isBrowser) {
+          try {
+            const resource = await server.getResourceAsync(ctx, ctx.requested.uri);
+            const list = await resource.readDirAsync();
+            const uri = ctx.requested.uri.slice(-1) === '/' ? ctx.requested.uri : ctx.requested.uri + '/';
+            if(config.autoIndex && list.includes('index.html')) {
+              ctx.requested.path = `${uri}index.html` as any;
+            } else {
+              const up =  `<a href="${ uri.split('/').slice(0, -2).join('/') || '/' }">..</a><br/>`;
+              const html = up + list.map(item => `<a href="${ uri + item }">${ item }</a><br/>`).join('');
+              // ctx.response.setHeader('Content-Type', 'text/html;charset=UTF-8');
+              ctx.response.end(`<html><head><meta charset="UTF-8"></head><body>${html}</body></html>`);
+            }
+          } catch {}
+        }
       }
       next();
     });

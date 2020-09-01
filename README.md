@@ -44,6 +44,8 @@ npx webdav-cli --help
     '  --digest     Enable digest authentication [basic]',
     '  --username   Username for basic/digest authentication [random]',
     '  --password   Password for basic/digest authentication [random]',
+    '  --directory  Show directory listings [false]',
+    '  --autoIndex  Display autoIndex [false]',
     '  --ssl        Enable https [false]',
     '  --sslKey     Path to ssl key file [self-signed]',
     '  --sslCert    Path to ssl cert file [self-signed]',
@@ -62,7 +64,8 @@ npx webdav-cli --help
     '  WEBDAV_CLI_PATH, WEBDAV_CLI_HOST, WEBDAV_CLI_PORT,',
     '  WEBDAV_CLI_USERNAME, WEBDAV_CLI_PASSWORD, WEBDAV_CLI_DIGEST,',
     '  WEBDAV_CLI_SSL, WEBDAV_CLI_SSL_KEY, WEBDAV_CLI_SSL_CERT,',
-    '  WEBDAV_CLI_RIGHTS, WEBDAV_CLI_DISABLE_AUTHENTICATION',
+    '  WEBDAV_CLI_DIRECTORY, WEBDAV_CLI_AUTO_INDEX, WEBDAV_CLI_RIGHTS',
+    '  WEBDAV_CLI_DISABLE_AUTHENTICATION',
 ```
 
 ## TLS/SSL
